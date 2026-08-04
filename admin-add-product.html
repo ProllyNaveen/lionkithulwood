@@ -1,0 +1,496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Add New Product — Lion Industries Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --cream: #F4EEE1;
+      --cream-2: #FBF7EF;
+      --espresso: #241510;
+      --umber: #6E4526;
+      --umber-light: #9A6B3F;
+      --amber: #BE7F35;
+      --olive: #4B5A38;
+      --line: rgba(36,21,16,0.14);
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--cream);
+      color: var(--espresso);
+      font-family: "Work Sans", sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+    }
+
+    .container {
+      max-width: 900px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: var(--espresso);
+      color: white;
+      padding: 30px 0;
+      text-align: center;
+      margin-bottom: 40px;
+    }
+
+    header h1 {
+      margin: 0;
+      font-family: "Fraunces", serif;
+      font-size: 2rem;
+    }
+
+    header p {
+      margin: 10px 0 0;
+      font-size: 0.95rem;
+      opacity: 0.9;
+    }
+
+    .form-section {
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      margin-bottom: 30px;
+    }
+
+    .form-section h2 {
+      margin-top: 0;
+      font-family: "Fraunces", serif;
+      font-size: 1.4rem;
+      border-bottom: 2px solid var(--amber);
+      padding-bottom: 15px;
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 8px;
+      font-weight: 600;
+      color: var(--espresso);
+    }
+
+    input[type="text"],
+    input[type="number"],
+    textarea,
+    select {
+      width: 100%;
+      padding: 12px;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.3s;
+    }
+
+    input:focus,
+    textarea:focus,
+    select:focus {
+      outline: none;
+      border-color: var(--amber);
+      box-shadow: 0 0 0 3px rgba(190,127,53,0.1);
+    }
+
+    textarea {
+      min-height: 100px;
+      resize: vertical;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    @media (max-width: 600px) {
+      .form-row {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .features-input {
+      display: flex;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .features-input input {
+      flex: 1;
+    }
+
+    .btn-remove {
+      background: #e74c3c;
+      color: white;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+    }
+
+    .btn-remove:hover {
+      background: #c0392b;
+    }
+
+    .btn-add-feature {
+      background: var(--olive);
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 600;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .btn-add-feature:hover {
+      background: #3d4a2d;
+    }
+
+    .button-group {
+      display: flex;
+      gap: 15px;
+      margin-top: 30px;
+    }
+
+    button {
+      padding: 14px 28px;
+      border: none;
+      border-radius: 4px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .btn-primary {
+      background: var(--espresso);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-primary:hover {
+      background: var(--umber);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: var(--umber);
+      color: white;
+      flex: 1;
+    }
+
+    .btn-secondary:hover {
+      background: var(--umber-light);
+      transform: translateY(-2px);
+    }
+
+    .alert {
+      padding: 15px;
+      border-radius: 4px;
+      margin-bottom: 20px;
+      display: none;
+    }
+
+    .alert.success {
+      background: #d4edda;
+      color: #155724;
+      border: 1px solid #c3e6cb;
+      display: block;
+    }
+
+    .alert.error {
+      background: #f8d7da;
+      color: #721c24;
+      border: 1px solid #f5c6cb;
+      display: block;
+    }
+
+    .alert.info {
+      background: #d1ecf1;
+      color: #0c5460;
+      border: 1px solid #bee5eb;
+      display: block;
+    }
+
+    code {
+      background: var(--cream-2);
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-family: "Courier New", monospace;
+      font-size: 0.9rem;
+    }
+
+    .note {
+      background: var(--cream-2);
+      padding: 15px;
+      border-left: 4px solid var(--amber);
+      border-radius: 4px;
+      margin: 20px 0;
+    }
+
+    .note strong {
+      color: var(--umber);
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <div class="container">
+    <h1>➕ Add New Product</h1>
+    <p>Easily add new products to your catalog</p>
+  </div>
+</header>
+
+<div class="container">
+  
+  <div id="alert"></div>
+
+  <div class="form-section">
+    <h2>📝 Product Information</h2>
+    
+    <div class="form-group">
+      <label for="productId">Product ID (used internally, no spaces or special chars)</label>
+      <input type="text" id="productId" placeholder="e.g. wooden-spoon-set" required>
+      <small style="color: var(--umber-light);">This becomes the folder name for images: /images/products/wooden-spoon-set/</small>
+    </div>
+
+    <div class="form-group">
+      <label for="productName">Product Name</label>
+      <input type="text" id="productName" placeholder="e.g. Wooden Spoon Set" required>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="category">Category</label>
+        <select id="category" required>
+          <option value="">-- Select Category --</option>
+          <option value="kitchen">Kitchenware</option>
+          <option value="trays">Trays & Boxes</option>
+          <option value="home">Home & Bath</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="image">Image Filename</label>
+        <input type="text" id="image" placeholder="e.g. spoon-set.jpg" required>
+        <small style="color: var(--umber-light);">Main image in /images/products/ folder</small>
+      </div>
+    </div>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label for="price">Price (Rs.)</label>
+        <input type="number" id="price" placeholder="e.g. 3500" required>
+      </div>
+
+      <div class="form-group">
+        <label for="priceLabel">Price Label (optional)</label>
+        <select id="priceLabel">
+          <option value="">No label</option>
+          <option value="From">From</option>
+          <option value="Starting at">Starting at</option>
+        </select>
+        <small style="color: var(--umber-light);">Shows "From Rs. 3500" if selected</small>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="size">Size / Dimensions</label>
+      <input type="text" id="size" placeholder="e.g. 6 spoons + stand" required>
+    </div>
+
+    <div class="form-group">
+      <label for="material">Material</label>
+      <input type="text" id="material" placeholder="e.g. Kithul Wood" required>
+    </div>
+
+    <div class="form-group">
+      <label for="description">Description (shown on detail page)</label>
+      <textarea id="description" placeholder="Describe your product..." required></textarea>
+    </div>
+  </div>
+
+  <div class="form-section">
+    <h2>✨ Product Features</h2>
+    <p>Add key features that highlight your product:</p>
+    
+    <div id="featuresContainer"></div>
+    
+    <button class="btn-add-feature" onclick="addFeatureInput()">+ Add Feature</button>
+  </div>
+
+  <div class="form-section">
+    <h2>📤 Next Steps</h2>
+    
+    <div class="note">
+      <strong>Image Setup:</strong> After adding this product, create a folder at <code>/images/products/{product-id}/</code> and add images named <code>pic1.jpg</code>, <code>pic2.jpg</code>, <code>pic3.jpg</code>, etc.
+    </div>
+
+    <div class="note">
+      <strong>Example:</strong>
+      <br>Product ID: <code>wooden-spoon-set</code>
+      <br>Image folder: <code>/images/products/wooden-spoon-set/</code>
+      <br>Images: <code>pic1.jpg, pic2.jpg, pic3.jpg</code>
+    </div>
+
+    <div class="button-group">
+      <button class="btn-primary" onclick="addProduct()">✅ Add Product to JSON</button>
+      <button class="btn-secondary" onclick="resetForm()">🔄 Clear Form</button>
+    </div>
+  </div>
+
+  <div class="form-section" style="background: var(--cream-2); border-color: var(--line);">
+    <h2>📋 Instructions</h2>
+    <ol>
+      <li><strong>Fill out the form above</strong> with your product details</li>
+      <li><strong>Click "Add Product to JSON"</strong> - it generates JSON code</li>
+      <li><strong>Copy the generated JSON</strong> (shown below)</li>
+      <li><strong>Edit data/products.json</strong> in your text editor and paste before the closing bracket</li>
+      <li><strong>Upload the updated file</strong> to your server</li>
+      <li><strong>Create image folder</strong> at /images/products/{product-id}/ and upload pic1.jpg, pic2.jpg, etc.</li>
+      <li><strong>Refresh your website</strong> - new product appears!</li>
+    </ol>
+  </div>
+
+  <div class="form-section">
+    <h2>📝 JSON Output (copy this)</h2>
+    <textarea id="jsonOutput" style="font-family: 'Courier New', monospace; font-size: 0.9rem; background: #f5f5f5; color: #333;" readonly></textarea>
+    <button class="btn-primary" style="margin-top: 10px;" onclick="copyJSON()">📋 Copy JSON Code</button>
+  </div>
+
+  <div class="form-section" style="margin-top: 30px; text-align: center; opacity: 0.7;">
+    <p><small>⚠️ Remember: After copying the JSON, paste it into <code>data/products.json</code> before the last closing bracket: <code>]</code></small></p>
+    <p><small><a href="index.html" style="color: var(--amber); text-decoration: none;">← Back to Website</a></small></p>
+  </div>
+
+</div>
+
+<script>
+function addFeatureInput() {
+  const container = document.getElementById('featuresContainer');
+  const index = container.children.length;
+  const html = `
+    <div class="features-input">
+      <input type="text" class="feature-input" placeholder="e.g. Handcrafted from premium wood" data-feature="${index}">
+      <button class="btn-remove" type="button" onclick="removeFeature(${index})">Remove</button>
+    </div>
+  `;
+  container.insertAdjacentHTML('beforeend', html);
+}
+
+function removeFeature(index) {
+  const input = document.querySelector(`[data-feature="${index}"]`);
+  if (input) input.parentElement.remove();
+}
+
+// Add initial feature input
+addFeatureInput();
+
+function showAlert(message, type) {
+  const alert = document.getElementById('alert');
+  alert.textContent = message;
+  alert.className = `alert ${type}`;
+  setTimeout(() => {
+    alert.className = 'alert';
+  }, 5000);
+}
+
+function addProduct() {
+  const productId = document.getElementById('productId').value.trim();
+  const productName = document.getElementById('productName').value.trim();
+  const category = document.getElementById('category').value;
+  const image = document.getElementById('image').value.trim();
+  const price = parseInt(document.getElementById('price').value);
+  const priceLabel = document.getElementById('priceLabel').value || null;
+  const size = document.getElementById('size').value.trim();
+  const material = document.getElementById('material').value.trim();
+  const description = document.getElementById('description').value.trim();
+
+  // Validate
+  if (!productId || !productName || !category || !image || !price || !size || !material || !description) {
+    showAlert('⚠️ Please fill in all required fields', 'error');
+    return;
+  }
+
+  // Get features
+  const features = Array.from(document.querySelectorAll('.feature-input'))
+    .map(input => input.value.trim())
+    .filter(v => v.length > 0);
+
+  if (features.length === 0) {
+    showAlert('⚠️ Please add at least one feature', 'error');
+    return;
+  }
+
+  // Create product object
+  const product = {
+    id: productId,
+    name: productName,
+    category: category,
+    image: image,
+    price: price,
+    priceLabel: priceLabel,
+    size: size,
+    description: description,
+    material: material,
+    features: features
+  };
+
+  // Generate JSON
+  const jsonStr = JSON.stringify(product, null, 2);
+  document.getElementById('jsonOutput').value = jsonStr;
+
+  showAlert('✅ JSON generated! Copy it below and paste into data/products.json', 'success');
+}
+
+function copyJSON() {
+  const output = document.getElementById('jsonOutput');
+  if (!output.value) {
+    showAlert('⚠️ Generate JSON first by clicking "Add Product to JSON"', 'error');
+    return;
+  }
+
+  output.select();
+  document.execCommand('copy');
+  showAlert('✅ JSON copied to clipboard!', 'success');
+}
+
+function resetForm() {
+  document.getElementById('productId').value = '';
+  document.getElementById('productName').value = '';
+  document.getElementById('category').value = '';
+  document.getElementById('image').value = '';
+  document.getElementById('price').value = '';
+  document.getElementById('priceLabel').value = '';
+  document.getElementById('size').value = '';
+  document.getElementById('material').value = '';
+  document.getElementById('description').value = '';
+  document.getElementById('jsonOutput').value = '';
+  
+  // Reset features
+  const container = document.getElementById('featuresContainer');
+  container.innerHTML = '';
+  addFeatureInput();
+
+  showAlert('✅ Form cleared', 'info');
+}
+</script>
+
+</body>
+</html>

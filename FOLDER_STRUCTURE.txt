@@ -1,0 +1,219 @@
+================================================================================
+  LION INDUSTRIES — FOLDER STRUCTURE FOR PRODUCT IMAGES
+================================================================================
+
+Your website now supports multiple images per product!
+
+Here's where to add images for each product:
+
+================================================================================
+MAIN FOLDER LOCATION
+================================================================================
+
+/images/products/
+
+================================================================================
+FOLDER STRUCTURE EXAMPLE
+================================================================================
+
+/images/products/
+├── spoon-set.jpg                    ← Main/featured image (required)
+├── spoon-set/                       ← NEW! Product folder for extra images
+│   ├── detail-1.jpg
+│   ├── detail-2.jpg
+│   ├── detail-3.jpg
+│   └── lifestyle.jpg
+│
+├── mortar-pestle.jpg                ← Main/featured image (required)
+├── mortar-pestle/                   ← Product folder for extra images
+│   ├── top-view.jpg
+│   └── closeup.jpg
+│
+├── cutting-boards.jpg
+├── cutting-boards/
+│   ├── various-sizes.jpg
+│   └── in-use.jpg
+│
+├── mirror-holder.jpg
+├── mirror-holder/
+│   ├── front.jpg
+│   ├── side.jpg
+│   └── room-display.jpg
+│
+└── ... (repeat for all products)
+
+================================================================================
+FOR EACH PRODUCT, YOU NEED:
+================================================================================
+
+1. MAIN IMAGE (required)
+   File: {product-id}.jpg
+   Location: /images/products/
+   Example: /images/products/spoon-set.jpg
+
+2. PRODUCT FOLDER (optional but recommended)
+   Folder name: {product-id}/
+   Location: /images/products/{product-id}/
+   Example: /images/products/spoon-set/
+   
+   Inside this folder:
+   - detail-1.jpg
+   - detail-2.jpg
+   - lifestyle.jpg
+   - closeup.jpg
+   (any images you want to show)
+
+================================================================================
+COMPLETE LIST OF ALL PRODUCT IDS
+================================================================================
+
+Kitchen Items:
+- spoon-set
+- mortar-pestle
+- table-spoon-set
+- coconut-cups
+- halmilla-cup
+- tea-cup-set
+- kithul-spoons
+- chopsticks
+- kohomba-plate
+- kohomba-salt-pepper
+- kohomba-spoon
+- rice-spoon
+- kohomba-small-spoon
+- butter-spoon
+- kohomba-bowls
+- coconut-wood-bowls
+- cutting-boards
+- pizza-boards
+- coconut-cups-spoon
+
+Trays & Boxes:
+- toothpick-holder
+- tray-10x8
+- tray-17x12
+- tray-12x17
+- soap-box
+- jewellery-box
+- jewellery-box-handle
+- chocolate-box
+- tissue-box
+- tissue-holder
+- incense-holder
+- table-mats
+- table-runner
+- salt-pepper-holder
+
+Home & Bath:
+- shampoo-holder
+- candle-holder
+- ashtray
+- mirror-holder
+- mirror-plain
+- mirror-6x2
+- towel-rack
+- bathroom-set
+- lamp-set
+
+================================================================================
+STEP-BY-STEP INSTRUCTIONS
+================================================================================
+
+Step 1: Keep Main Images
+The main product images are already at:
+/images/products/{product-id}.jpg
+Example: /images/products/spoon-set.jpg
+
+DO NOT MOVE OR DELETE THESE!
+
+Step 2: Create Product Folders
+Using your file manager or command line:
+
+mkdir /images/products/spoon-set/
+mkdir /images/products/mortar-pestle/
+mkdir /images/products/cutting-boards/
+... (repeat for all products)
+
+Step 3: Add Extra Images
+Copy your additional product photos into the folders:
+
+/images/products/spoon-set/
+├── detail-1.jpg
+├── detail-2.jpg
+└── lifestyle.jpg
+
+Step 4: Done!
+Your website will automatically show these images in the product detail page!
+
+================================================================================
+IMAGE REQUIREMENTS
+================================================================================
+
+Format: JPG, PNG, or WebP
+Size: Ideally 1200px × 1200px or larger (square aspect ratio works best)
+Quality: High quality (natural lighting, clear product visibility)
+Naming: Use simple names (detail-1.jpg, angle-2.jpg, lifestyle.jpg)
+
+================================================================================
+WHAT HAPPENS WHEN YOU ADD IMAGES
+================================================================================
+
+1. User visits your homepage
+2. User clicks on a product card
+3. Product detail page loads with:
+   ✓ Main product image
+   ✓ Thumbnail gallery of additional images (if you added any)
+   ✓ Full product description
+   ✓ Size and material info
+   ✓ Product features
+   ✓ WhatsApp inquiry button
+
+================================================================================
+OPTIONAL: Product Folders ARE NOT Required
+================================================================================
+
+✓ Your website works with JUST the main image
+✓ Creating product folders is OPTIONAL for better presentation
+✓ Start simple, add detailed images later!
+
+================================================================================
+EXAMPLE: SPOON-SET PRODUCT
+================================================================================
+
+Currently you have:
+/images/products/spoon-set.jpg
+
+To add more images, create:
+/images/products/spoon-set/
+
+Then add images like:
+/images/products/spoon-set/detail-close.jpg
+/images/products/spoon-set/set-display.jpg
+/images/products/spoon-set/in-kitchen.jpg
+
+When someone clicks "Kithul Wood Spoon Set" on your homepage:
+→ They'll see the main image
+→ A gallery of your 3 detail images appears below
+→ They can click thumbnails to switch images
+→ All product info displays beautifully
+
+================================================================================
+QUICK REFERENCE
+================================================================================
+
+Main image location:  /images/products/{product-id}.jpg
+Extra images folder:  /images/products/{product-id}/
+                      └─ image1.jpg
+                      └─ image2.jpg
+                      └─ image3.jpg
+
+Change price:         data/products.json (open in text editor, change "price")
+Add description:      data/products.json (change "description" field)
+Update features:      data/products.json (change "details" array)
+
+================================================================================
+
+That's it! Your folder structure is ready to use.
+Start by adding your product images to these folders.
+
+Good luck! 🌳

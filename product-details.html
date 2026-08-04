@@ -1,0 +1,456 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product Details — Lion Industries</title>
+  <meta name="description" content="Product details for Lion Industries handcrafted wood products from Sri Lanka.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    .product-detail {
+      padding: 40px 0;
+    }
+
+    .product-detail .container {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 60px;
+      align-items: start;
+    }
+    
+    @media (max-width: 760px) {
+      .product-detail {
+        padding: 30px 0;
+      }
+      
+      .product-detail .container {
+        grid-template-columns: 1fr;
+        gap: 30px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .product-detail {
+        padding: 20px 0;
+      }
+      
+      .product-detail .container {
+        gap: 20px;
+      }
+    }
+
+    .product-images {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .product-main-image {
+      width: 100%;
+      background: var(--cream);
+      border-radius: 8px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
+    }
+
+    .product-main-image img {
+      width: 100%;
+      height: auto;
+      object-fit: contain;
+      max-height: 600px;
+    }
+
+    .product-thumbnails {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+
+    .thumbnail {
+      aspect-ratio: 1;
+      background: var(--cream);
+      border-radius: 6px;
+      overflow: hidden;
+      cursor: pointer;
+      border: 2px solid transparent;
+      transition: all 0.3s ease;
+    }
+
+    .thumbnail img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .thumbnail:hover,
+    .thumbnail.active {
+      border-color: var(--dark);
+    }
+
+    .product-info {
+      display: flex;
+      flex-direction: column;
+      gap: 30px;
+    }
+
+    .product-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 24px;
+    }
+
+    .product-header .cat-chip {
+      display: inline-block;
+      background: var(--cream);
+      padding: 6px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--umber);
+      width: fit-content;
+    }
+
+    .product-header h1 {
+      font-size: 2.2rem;
+      font-family: var(--serif);
+      color: var(--dark);
+      margin: 0;
+    }
+
+    .product-price {
+      font-size: 1.8rem;
+      font-weight: 600;
+      color: var(--dark);
+    }
+
+    .product-specs {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+
+    .spec-item {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .spec-label {
+      font-size: 0.85rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      color: var(--umber);
+    }
+
+    .spec-value {
+      font-size: 1rem;
+      color: var(--dark);
+      line-height: 1.6;
+    }
+
+    .product-description {
+      font-size: 1rem;
+      line-height: 1.8;
+      color: var(--text);
+      border: 1px solid var(--border);
+      padding: 20px;
+      border-radius: 8px;
+      background: var(--cream);
+    }
+
+    .product-details-list {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .detail-item {
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .detail-item::before {
+      content: "✓";
+      color: var(--dark);
+      font-weight: bold;
+      flex-shrink: 0;
+      margin-top: 2px;
+    }
+
+    .detail-item span {
+      font-size: 0.95rem;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    @media (max-width: 760px) {
+      
+      .product-header h1 {
+        font-size: 1.8rem;
+      }
+      
+      .product-price {
+        font-size: 1.6rem;
+      }
+      
+      .product-specs {
+        gap: 14px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      .btn-large {
+        padding: 12px 16px;
+        font-size: 0.88rem;
+      }
+      
+      .product-header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .product-price {
+        font-size: 1.4rem;
+      }
+      
+      .product-images {
+        gap: 16px;
+      }
+      
+      .product-thumbnails {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 10px;
+      }
+    }
+
+    .back-button {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 16px;
+      text-decoration: none;
+      color: var(--dark);
+      font-weight: 500;
+      margin-bottom: 20px;
+      width: fit-content;
+    }
+
+    .back-button:hover {
+      opacity: 0.7;
+    }
+
+    .no-image-placeholder {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, var(--cream) 0%, var(--umber-light) 100%);
+      color: var(--umber);
+      font-size: 0.9rem;
+      text-align: center;
+      padding: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .product-detail .container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .product-header h1 {
+        font-size: 1.6rem;
+      }
+
+      .product-price {
+        font-size: 1.4rem;
+      }
+
+      .product-thumbnails {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ============ PRODUCT DETAIL ============ -->
+<section class="product-detail" id="productDetail">
+  <div class="container">
+    <div style="width: 100%; grid-column: 1 / -1; margin-bottom: 30px;">
+      <a href="index.html#products" class="back-button"onclick="window.history.back(); return false;">← Back to Products</a>
+    </div>
+    
+    <div class="product-images">
+      <div class="product-main-image" id="mainImageContainer">
+        <div class="no-image-placeholder">Loading product image...</div>
+      </div>
+      <div class="product-thumbnails" id="thumbnails"></div>
+    </div>
+
+    <div class="product-info">
+      <div class="product-header">
+        <span class="cat-chip" id="productCategory"></span>
+        <h1 id="productName"></h1>
+      </div>
+
+      <div class="product-specs">
+        <div class="spec-item">
+          <div class="spec-label">Size / Dimensions</div>
+          <div class="spec-value" id="productSize"></div>
+        </div>
+        <div class="spec-item">
+          <div class="spec-label">Material</div>
+          <div class="spec-value" id="productMaterial"></div>
+        </div>
+      </div>
+
+      <div class="product-description" id="productDescription"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ FOOTER ============ -->
+<footer class="site-footer">
+  <div class="container">
+    <p style="text-align:center;">
+      &copy; <span id="year"></span> Lion Kithul Wood. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+<script>
+document.getElementById('year').textContent = new Date().getFullYear();
+
+const urlParams = new URLSearchParams(window.location.search);
+const productId = urlParams.get('id');
+
+console.log('Product ID:', productId);
+
+async function loadProductDetails() {
+  const mainImageContainer = document.getElementById('mainImageContainer');
+  const thumbnailsContainer = document.getElementById('thumbnails');
+
+  try {
+    console.log('Fetching products.json...');
+    const response = await fetch('data/products.json', { cache: 'no-store' });
+    
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+
+    const data = await response.json();
+    console.log('JSON loaded, products count:', data.products.length);
+
+    const product = data.products.find(p => p.id === productId);
+    console.log('Product found:', product);
+
+    if (!product) {
+      mainImageContainer.innerHTML = `<p>Product ID "${productId}" not found!</p>`;
+      return;
+    }
+
+    // Format price
+    function formatRs(n) {
+      return "Rs. " + n.toLocaleString("en-LK");
+    }
+
+    // Set title
+    document.title = product.name;
+
+    // Labels
+    const CATEGORY_LABEL = {
+      kitchen: "Kitchenware",
+      trays: "Trays & Boxes",
+      home: "Home & Bath"
+    };
+
+    // Fill in product data
+    document.getElementById('productCategory').textContent = CATEGORY_LABEL[product.category];
+    document.getElementById('productName').textContent = product.name;
+    document.getElementById('productSize').textContent = product.size;
+    document.getElementById('productMaterial').textContent = product.material;
+    document.getElementById('productDescription').textContent = product.description;
+
+    // Load main image
+    const imagePath = `images/products/${product.image}`;
+    console.log('Loading main image from:', imagePath);
+    
+    const mainImg = new Image();
+    mainImg.onload = () => {
+      console.log('Main image loaded!');
+      mainImageContainer.innerHTML = `<img src="${imagePath}" alt="${product.name}" loading="lazy" decoding="async">`;
+    };
+    mainImg.onerror = () => {
+      console.error('Main image failed to load:', imagePath);
+      mainImageContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: red;">❌ Image not found: ${imagePath}</p>`;
+    };
+    mainImg.src = imagePath;
+
+    // Load extra images from folder
+    console.log('Checking for extra images in:', `images/products/${product.id}/`);
+    const thumbnails = [];
+
+    for (let i = 1; i <= 10; i++) {
+      const picPath = `images/products/${product.id}/pic${i}.jpg`;
+      const imgExists = await new Promise(resolve => {
+        const img = new Image();
+        img.onload = () => {
+          console.log('Found image:', picPath);
+          thumbnails.push(picPath);
+          resolve(true);
+        };
+        img.onerror = () => resolve(false);
+        img.src = picPath;
+      });
+      if (!imgExists) break;
+    }
+
+    console.log('Total extra images found:', thumbnails.length);
+
+    if (thumbnails.length > 0) {
+      let html = '';
+      thumbnails.forEach(pic => {
+        html += `<div class="thumbnail" data-image="${pic}">
+          <img src="${pic}" alt="Product view" loading="lazy" decoding="async">
+        </div>`;
+      });
+      thumbnailsContainer.innerHTML = html;
+
+      document.querySelectorAll('.thumbnail').forEach((t, i) => {
+        t.addEventListener('click', function() {
+          document.querySelectorAll('.thumbnail').forEach(th => th.classList.remove('active'));
+          this.classList.add('active');
+          mainImageContainer.innerHTML = `<img src="${this.dataset.image}" alt="Product view" loading="lazy" decoding="async">`;
+        });
+        if (i === 0) t.classList.add('active');
+      });
+    } else {
+      thumbnailsContainer.innerHTML = `<p style="grid-column: 1/-1; text-align: center; color: var(--umber); font-size: 0.85rem; padding: 20px; background: var(--cream-2); border-radius: 6px;">
+        💡 To add more images: Create folder <code>/images/products/${product.id}/</code> and add <strong>pic1.jpg, pic2.jpg, pic3.jpg</strong>, etc.
+      </p>`;
+    }
+
+  } catch (error) {
+    console.error('Error:', error);
+    mainImageContainer.innerHTML = `<p style="padding: 20px; text-align: center; color: red;">❌ ERROR: ${error.message}</p>`;
+  }
+}
+
+loadProductDetails();
+
+
+</script>
+</body>
+</html>
