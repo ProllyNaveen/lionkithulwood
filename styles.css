@@ -664,20 +664,26 @@ section{ position:relative; }
   .container{ padding:0 16px; }
   .section-pad{ padding:40px 0; }
   
-  /* Header */
+    /* Header */
   .site-header .container{ gap:12px; }
-  .brand-name{ font-size:1rem; }
+  .brand-name{ font-size:0.85rem; white-space: nowrap; }
+  .brand-sub{ font-size:0.52rem; letter-spacing:0.1em; }
   
   /* Hero section */
-  .hero-content{ padding:60px 0 80px; }
+  .hero-content{ padding:60px 20px 80px; }
   .hero-content .eyebrow{ font-size:0.65rem; }
   .hero-content h1{ font-size:1.75rem; }
   .hero-content p{ font-size:0.9rem; }
   .hero-actions{ gap:10px; }
   
-  /* Section headings */
+    /* Section headings */
   .section-head{ margin-bottom:30px; }
   .section-head h2{ font-size:1.6rem; }
+    .about-copy h2{
+    font-size: clamp(0.95rem, 5.2vw, 1.5rem);
+    white-space: nowrap;
+    line-height: 1.25;
+  }
   
   /* About section */
   .about-stats{ grid-template-columns:repeat(3,1fr); gap:20px; }
@@ -749,4 +755,49 @@ section{ position:relative; }
 a:focus-visible, button:focus-visible{
   outline:2px solid var(--amber);
   outline-offset:3px;
+}
+/* First-card "details" hint */
+.product-media {
+  position: relative;
+}
+
+.details-hint {
+  position: absolute;
+  bottom: 12px;
+  left: 12px;
+  right: 12px;
+  background: rgba(20, 14, 8, 0.85);
+  color: #fff;
+  font-family: 'Work Sans', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
+  padding: 8px 14px;
+  border-radius: 999px;
+  text-align: center;
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  z-index: 2;
+}
+
+.details-hint.show {
+  animation: hintPulse 8s ease forwards;
+}
+
+.hint-arrow {
+  display: inline-block;
+  animation: arrowNudge 1.2s ease-in-out infinite;
+}
+
+@keyframes hintPulse {
+  0%   { opacity: 0; transform: translateY(8px); }
+  10%  { opacity: 1; transform: translateY(0); }
+  80%  { opacity: 1; transform: translateY(0); }
+  100% { opacity: 0; transform: translateY(-4px); }
+}
+
+@keyframes arrowNudge {
+  0%, 100% { transform: translateX(0); }
+  50%      { transform: translateX(4px); }
 }

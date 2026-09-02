@@ -4,7 +4,7 @@
 // ===================================================================
 
 let PRODUCTS = [];
-
+let productsInView = false;
 const CATEGORY_LABEL = {
   kitchen: "Kitchenware",
   trays: "Trays & Boxes",
@@ -22,13 +22,17 @@ function renderProducts(filter){
     return;
   }
   
-  const items = filter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
-  grid.innerHTML = items.map(p => {
+      const items = filter === "all" ? PRODUCTS : PRODUCTS.filter(p => p.category === filter);
+  grid.innerHTML = items.map((p, index) => {
+    const hint = index === 0
+      ? `<div class="details-hint">Click to see more details <span class="hint-arrow">→</span></div>`
+      : "";
     return `
     <a href="product-details.html?id=${p.id}" style="text-decoration: none; color: inherit;">
       <article class="product-card" data-cat="${p.category}">
         <div class="product-media">
           <img src="images/products/${p.image}" alt="${p.name}" loading="lazy" decoding="async">
+          ${hint}
         </div>
         <div class="product-info">
           <span class="cat-chip">${CATEGORY_LABEL[p.category]}</span>
@@ -38,6 +42,11 @@ function renderProducts(filter){
     </a>
   `;
   }).join("");
+
+  if (productsInView) {
+    const hint = document.querySelector(".details-hint");
+    if (hint) hint.classList.add("show");
+  }
 }
 
 async function loadProducts() {
@@ -107,7 +116,24 @@ function attachFilterListeners() {
 
 document.addEventListener("DOMContentLoaded", () => {
   loadProducts();
+	
+	  // Trigger "Click to see more details" hint only when Products section scrolls into view
+  const productsSection = document.getElementById("products");
+  if (productsSection) {
+    const hintObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          productsInView = true;
+          const hint = document.querySelector(".details-hint");
+          if (hint) hint.classList.add("show");
+          hintObserver.unobserve(productsSection); // only trigger once
+        }
+      });
+        }, { threshold: 0, rootMargin: "0px 0px -70% 0px" }); // fires as soon as section starts entering view
 
+    hintObserver.observe(productsSection);
+  }
+	
   // Header scroll state
   const header = document.getElementById("siteHeader");
   const onScroll = () => {
