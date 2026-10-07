@@ -1,0 +1,2 @@
+put images u want to convert whats best for the web inside this folder and click convert.bat
+original images remains same and converted images will be created inside a folder name converted
