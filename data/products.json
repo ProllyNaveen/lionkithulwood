@@ -36,6 +36,19 @@
       "material": "Kithul Wood",
       "features": ["Single spoon", "Hand-turned kithul wood", "Ergonomic design", "Perfect addition to any kitchen"]
     },
+	
+	{
+      "id": "tea-spoon",
+      "name": "Kithul Wood Tea Spoon",
+      "category": "kitchen",
+      "image": "tea-spoon.jpg",
+      "price": 450,
+      "priceLabel": null,
+      "size": "5 inches",
+      "description": "Handcrafted kithul wood tea spoon, elegant and practical for everyday tea and coffee.",
+      "material": "Kithul Wood",
+      "features": ["Single spoon", "Hand-turned kithul wood", "Ergonomic design", "Perfect addition to any kitchen"]
+    },
    
     {
       "id": "halmilla-cup",
